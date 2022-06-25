@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Text, StyleSheet, View } from 'react-native'
-import { createAppContainer } from 'react-navigation'
-import { createStackNavigator } from 'react-navigation-stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { NavigationContainer } from '@react-navigation/native';
 
 // pages
 import { Home } from './pages/home';
@@ -10,30 +10,24 @@ import { Profile } from './pages/profile';
 import { Setting } from './pages/setting';
 
 
-const App = createStackNavigator(
-  {
-    Home: {
-      screen: Home,
-    },
-    Chat: {
-      screen: Chat,
-    },
-    Profile: {
-      screen: Profile,
-    },
-    Setting: {
-      screen: Setting,
-    }
-  },
-  {
-    initialRouteName: 'Home',
-  }
-);
+const Tab = createBottomTabNavigator();
 
-const AppContainer = createAppContainer(App);
+const BottomTabs = () => {
+  return (
+    <Tab.Navigator>
+      <Tab.Screen name="Home" component={Home} />
+      <Tab.Screen name="Chat" component={Chat} />
+      <Tab.Screen name="Profile" component={Profile} />
+      <Tab.Screen name="Setting" component={Setting} />
+    </Tab.Navigator>
+  )
+}
+
 
 export default () => (
-  <AppContainer />
+  <NavigationContainer>
+    <BottomTabs />
+  </NavigationContainer>
 );
 
 const styles = StyleSheet.create({
